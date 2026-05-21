@@ -18,13 +18,15 @@ export class LoginasSalesPage {
     await this.searchBox.fill(userName);
     await this.searchBox.press('Enter');
 
-    await this.page.getByRole('heading', { name: 'People' });
-    await this.page.getByRole('link', { name: 'Kintan Pasha' }).click();
+    await this.page.getByRole('heading', { name: 'People' }).waitFor();
+    await this.page.getByRole('link', { name: userName }).click();
     await this.userDetailButton.click();
 
-    await this.page.waitForURL(/ManageUsers/, { timeout: 15000 });
+    await this.page.waitForURL(/ManageUsers/);
+    await this.page.waitForLoadState('load');
+    await this.loginAsButton.waitFor();
     await this.loginAsButton.click();
 
-    await expect(this.page.getByText(new RegExp(`Logged in as ${userName}`, 'i'))).toBeVisible({ timeout: 15000 });
+    await expect(this.page.getByText(new RegExp(`Logged in as ${userName}`, 'i'))).toBeVisible();
   }
 }

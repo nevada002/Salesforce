@@ -7,7 +7,8 @@
     "setup": "node utils/globalSetup.js",
     "test": "playwright test",
     "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "test:report": "playwright show-report",
+    "clear:session": "node -e \"const fs=require('fs'); fs.existsSync('auth.json') && fs.unlinkSync('auth.json') && console.log('Session cleared') || console.log('No session found')\""
   },
   "keywords": [],
   "author": "",
